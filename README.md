@@ -433,9 +433,9 @@ pytest tests/
 
 ---
 
-# Author
+# Author / Contributor
 
-Saroj Namabathula
+[Saroj Namabathula](https://github.com/Sarojnamabathula)
 
 AI/ML Engineer | Computer Vision Enthusiast | Full Stack Developer
 
