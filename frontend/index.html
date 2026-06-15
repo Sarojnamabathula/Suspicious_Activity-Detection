@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SentinelAI — Real-time AI interview monitoring dashboard">
+    <title>SentinelAI — Interview Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <main class="dashboard">
+
+        <!-- ── Header ─────────────────────────────────── -->
+        <header class="header glass-panel">
+            <div class="logo">
+                <h1>SentinelAI</h1>
+                <span class="pulse-indicator"></span>
+                <span class="status-text">LIVE</span>
+            </div>
+            <div class="telemetry-info">
+                <div class="stat-group">
+                    <p>Uptime: <span id="uptime" class="mono">0s</span></p>
+                    <p>Frames: <span id="frame-count" class="mono">0</span></p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-group perf-stats">
+                    <p>FPS: <span id="fps" class="mono">0.0</span></p>
+                    <p>Inf: <span id="inf-time" class="mono">0</span>ms</p>
+                    <p>CPU: <span id="cpu-usage" class="mono">0</span>%</p>
+                    <p>RAM: <span id="ram-usage" class="mono">0</span>MB</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ── Top Row: Video + Sidebar ───────────────── -->
+        <section class="top-row">
+
+            <!-- Live camera feed -->
+            <section class="video-section glass-panel">
+                <div class="video-header">
+                    <span class="video-label">📷 Candidate Feed</span>
+                    <span class="rec-badge">● REC</span>
+                </div>
+                <div class="video-container">
+                    <img id="video-stream" src="/api/stream" alt="Live AI Interview Feed" />
+                    <div class="video-overlay-corners">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sidebar: risk score + metric cards -->
+            <aside class="sidebar">
+
+                <!-- Risk ring -->
+                <div class="metric-card glass-panel main-score-card">
+                    <h2>Risk Score</h2>
+                    <div class="score-container">
+                        <svg viewBox="0 0 100 100" class="score-ring">
+                            <circle cx="50" cy="50" r="45" class="ring-bg"></circle>
+                            <circle cx="50" cy="50" r="45" class="ring-fill" id="score-ring-fill"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <span id="risk-score">0</span>
+                        </div>
+                    </div>
+                    <div class="severity-badge bg-safe" id="severity-badge">SAFE</div>
+                </div>
+
+                <!-- Detector metrics -->
+                <div class="details-grid">
+                    <div class="metric-card glass-panel">
+                        <h3>Face</h3>
+                        <div class="metric-value" id="face-present">Checking…</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <h3>Persons</h3>
+                        <div class="metric-value" id="person-count">0</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <h3>Phone</h3>
+                        <div class="metric-value" id="phone-detected">None</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <h3>Gaze</h3>
+                        <div class="metric-value" id="gaze-status">UNKNOWN</div>
+                    </div>
+                </div>
+
+            </aside>
+        </section>
+
+        <!-- ── Alerts ──────────────────────────────────── -->
+        <section class="alerts-section glass-panel">
+            <div class="alerts-header">
+                <h2>Recent Alerts</h2>
+                <span class="alert-count"><span id="total-alerts">0</span> Total</span>
+            </div>
+            <div class="alerts-list" id="alerts-list">
+                <div class="empty-state">No alerts detected yet.</div>
+            </div>
+        </section>
+        
+        <div class="report-actions">
+            <button id="end-session-btn" class="glass-btn primary">End Session & Generate Report</button>
+        </div>
+
+    </main>
+    
+    <!-- Report Modal -->
+    <div id="report-modal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <h2>Session Report</h2>
+            <div id="report-content">Loading...</div>
+            <button id="close-modal-btn" class="glass-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

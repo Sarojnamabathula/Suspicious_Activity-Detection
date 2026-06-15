@@ -1,0 +1,20 @@
+# SentinelAI Default Configuration
+# Values here can be overridden by environment variables or a .env file.
+
+stream_mode: "webcam"    # webcam, video_file, simulation
+target_fps: 30
+frame_width: 640
+
+# Temporal Thresholds
+face_missing_duration_s: 10.0
+multiple_persons_duration_s: 3.0
+gaze_away_duration_s: 5.0
+phone_consecutive_frames: 6
+
+# Alert Policies
+alert_cooldown_seconds: 30.0
+
+# Inference
+yolo_min_confidence: 0.6
+phone_min_confidence: 0.3
+face_min_confidence: 0.6
